@@ -1,3 +1,20 @@
+function startHeadlights() {
+    // Create headlights
+    const headlights = document.createElement("div");
+    headlights.className = "headlights";
+    document.body.appendChild(headlights);
+
+    // Move headlights across the screen
+    let position = 0;
+    const moveInterval = setInterval(() => {
+        position += 5; // Adjust the speed as needed
+        headlights.style.left = position + "px";
+        if (position > window.innerWidth) {
+            position = -headlights.offsetWidth;
+        }
+    }, 50); // Adjust the interval as needed
+}
+
 document.addEventListener("DOMContentLoaded", function() {
     const questions = [
         { question: "What is the capital of France?", answer: "Paris" },
