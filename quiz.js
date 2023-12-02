@@ -12,6 +12,17 @@ document.addEventListener("DOMContentLoaded", function() {
         questionText.textContent = questions[currentQuestionIndex].question;
     }
 
+    function startQuiz() {
+        const startButton = document.getElementById("startButton");
+        const quizContainer = document.getElementById("quiz-container");
+        const audio = document.getElementById("myAudio");
+
+        startButton.style.display = "none";
+        quizContainer.style.display = "block";
+        audio.play();
+        displayQuestion();
+    }
+
     function checkAnswer() {
         const userAnswer = document.getElementById("answer-input").value;
         const correctAnswer = questions[currentQuestionIndex].answer;
@@ -30,6 +41,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // Initial setup
-    displayQuestion();
+    window.startQuiz = startQuiz;
+    window.checkAnswer = checkAnswer;
 });
