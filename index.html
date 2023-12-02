@@ -21,6 +21,11 @@
     Your browser does not support the audio element.
 </audio>
 
+<script>
+    // Ensure that audio plays even if controls are hidden due to autoplay policies
+    document.getElementById('myAudio').play().then(() => {}).catch(() => {});
+</script>
+
 
 <script>
     function playAudio() {
