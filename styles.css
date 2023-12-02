@@ -1,6 +1,6 @@
 
 body {
-    .headlights {
+.headlights {
     position: fixed;
     top: 50%;
     left: 0;
@@ -10,6 +10,8 @@ body {
     border-radius: 50%;
     box-shadow: 0 0 20px 10px #ffffff; /* Glow effect */
     z-index: 1000; /* Ensure headlights are above other elements */
+}
+
 }
 
     font-family: Arial, sans-serif;
