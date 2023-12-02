@@ -16,10 +16,24 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<audio id="myAudio" controls autoplay loop>
+<button onclick="startQuiz()">Start Quiz</button>
+<audio id="myAudio" controls loop>
     <source src="openingsong.mp3" type="audio/mp3">
     Your browser does not support the audio element.
 </audio>
+
+<script>
+    function startQuiz() {
+        const audio = document.getElementById('myAudio');
+        audio.play().then(() => {
+            // Show controls after audio starts playing
+            audio.controls = true;
+        }).catch((error) => {
+            console.error('Error playing audio:', error);
+        });
+    }
+</script>
+
 
 <script>
     // Ensure that audio plays even if controls are hidden due to autoplay policies
