@@ -1,25 +1,21 @@
 document.addEventListener("DOMContentLoaded", function() {
-    function startHeadlights() {
-        const headlights = document.createElement("div");
-        headlights.className = "headlights";
-        document.body.appendChild(headlights);
+    const headlights = document.createElement("div");
+    headlights.className = "headlights";
+    document.body.appendChild(headlights);
 
-        let position = 0;
-        let isMovingRight = true;
+    let position = 0;
+    let isMovingRight = true;
 
-        function moveHeadlights() {
-            if (position > window.innerWidth - headlights.offsetWidth) {
-                isMovingRight = false;
-            } else if (position < 0) {
-                isMovingRight = true;
-            }
-
-            position += isMovingRight ? 5 : -5;
-            headlights.style.left = position + "px";
+    function moveHeadlights() {
+        if (position > window.innerWidth - headlights.offsetWidth) {
+            isMovingRight = false;
+        } else if (position < 0) {
+            isMovingRight = true;
         }
 
-        setInterval(moveHeadlights, 50);
+        position += isMovingRight ? 5 : -5;
+        headlights.style.left = position + "px";
     }
 
-    window.startHeadlights = startHeadlights;
+    setInterval(moveHeadlights, 50);
 });
