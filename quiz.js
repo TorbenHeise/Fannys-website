@@ -48,13 +48,20 @@ document.addEventListener("DOMContentLoaded", function() {
         document.body.appendChild(headlights);
 
         let position = 0;
-        const moveInterval = setInterval(() => {
-            position += 5;
-            headlights.style.left = position + "px";
-            if (position > window.innerWidth) {
-                position = -headlights.offsetWidth;
+        let isMovingRight = true;
+
+        function moveHeadlights() {
+            if (position > window.innerWidth - headlights.offsetWidth) {
+                isMovingRight = false;
+            } else if (position < 0) {
+                isMovingRight = true;
             }
-        }, 50);
+
+            position += isMovingRight ? 5 : -5;
+            headlights.style.left = position + "px";
+        }
+
+        setInterval(moveHeadlights, 50);
     }
 
     window.startQuiz = startQuiz;
