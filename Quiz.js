@@ -1,3 +1,19 @@
+function createBlinkingLights() {
+    const blinkingLightsContainer = document.createElement("div");
+    blinkingLightsContainer.classList.add("blinking-lights-container");
+
+    for (let i = 0; i < 5; i++) {
+        const blinkingLight = document.createElement("div");
+        blinkingLight.classList.add("blinking-light");
+        blinkingLightsContainer.appendChild(blinkingLight);
+    }
+
+    document.body.appendChild(blinkingLightsContainer);
+}
+
+// Call this function to create blinking lights when the page loads
+createBlinkingLights();
+
 const questions = [
     { question: "What is the capital of France?", answer: "Paris" },
     { question: "Which planet is known as the Red Planet?", answer: "Mars" },
