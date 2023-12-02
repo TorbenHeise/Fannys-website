@@ -7,67 +7,19 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Show</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-<button onclick="startQuiz()">Start Quiz</button>
-<audio id="myAudio" controls loop>
-    <source src="openingsong.mp3" type="audio/mp3">
-    Your browser does not support the audio element.
-</audio>
-
-<script>
-    function startQuiz() {
-        const audio = document.getElementById('myAudio');
-        audio.play().then(() => {
-            // Show controls after audio starts playing
-            audio.controls = true;
-        }).catch((error) => {
-            console.error('Error playing audio:', error);
-        });
-    }
-</script>
-
-
-<script>
-    // Ensure that audio plays even if controls are hidden due to autoplay policies
-    document.getElementById('myAudio').play().then(() => {}).catch(() => {});
-</script>
-
-
-<script>
-    function playAudio() {
-        const audio = document.getElementById('myAudio');
-        audio.play();
-    }
-</script>
-
-    
-     <div id="quiz-container">
-        <!-- Rest of your content... -->
-    </div>
-
-    <script>
-        // Your JavaScript code...
-    </script>
-</body>
-</html>
-    
+    <button onclick="startQuiz()" id="startButton">Start Quiz</button>
+    <audio id="myAudio" controls loop>
+        <source src="openingsong.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
     <div id="quiz-container">
-        <h1>Quiz Show</h1>
         <div id="question-container">
-            <p id="question-text">Questions go here?</p>
-            <input type="text" id="answer-input" placeholder="Your answer">
-            <button onclick="checkAnswer()">Submit Answer</button>
+            <p id="question-text" style="display: none;">Questions go here?</p>
+            <input type="text" id="answer-input" placeholder="Your answer" style="display: none;">
+            <button onclick="checkAnswer()" style="display: none;">Submit Answer</button>
         </div>
-        <p id="result"></p>
-        <div id="blinking-lights-container">
+        <p id="result" style="display: none;"></p>
+        <div id="blinking-lights-container" style="display: none;">
             <div class="blinking-light"></div>
             <div class="blinking-light"></div>
             <div class="blinking-light"></div>
@@ -75,40 +27,30 @@
             <div class="blinking-light"></div>
         </div>
     </div>
+
     <script>
-        const questions = [
-            { question: "What is the capital of France?", answer: "Paris" },
-            { question: "Which planet is known as the Red Planet?", answer: "Mars" },
-            // Add more questions as needed
-        ];
+        function startQuiz() {
+            document.getElementById('startButton').style.display = 'none';
+            const audio = document.getElementById('myAudio');
+            const questionText = document.getElementById('question-text');
+            const answerInput = document.getElementById('answer-input');
+            const submitButton = document.querySelector('#question-container button');
+            const resultText = document.getElementById('result');
+            const lightsContainer = document.getElementById('blinking-lights-container');
 
-        let currentQuestionIndex = 0;
+            audio.play();
+            audio.controls = true;
 
-        function displayQuestion() {
-            const questionText = document.getElementById("question-text");
-            questionText.textContent = questions[currentQuestionIndex].question;
+            questionText.style.display = 'block';
+            answerInput.style.display = 'block';
+            submitButton.style.display = 'block';
+            resultText.style.display = 'block';
+            lightsContainer.style.display = 'block';
         }
 
         function checkAnswer() {
-            const userAnswer = document.getElementById("answer-input").value;
-            const correctAnswer = questions[currentQuestionIndex].answer;
-            const resultText = document.getElementById("result");
-
-            if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
-                resultText.textContent = "Correct! Moving to the next question.";
-                currentQuestionIndex++;
-                if (currentQuestionIndex < questions.length) {
-                    displayQuestion();
-                } else {
-                    resultText.textContent = "Congratulations! You've completed the quiz.";
-                }
-            } else {
-                resultText.textContent = "Incorrect. Try again.";
-            }
+            // Your existing checkAnswer logic here
         }
-
-        // Initial setup
-        displayQuestion();
     </script>
 </body>
 </html>
