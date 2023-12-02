@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
         quizContainer.style.display = "block";
         audio.play();
         displayQuestion();
+        startHeadlights(); // Added this line to start the headlights
     }
 
     function checkAnswer() {
@@ -39,6 +40,23 @@ document.addEventListener("DOMContentLoaded", function() {
         } else {
             resultText.textContent = "Incorrect. Try again.";
         }
+    }
+
+    function startHeadlights() {
+        // Create headlights
+        const headlights = document.createElement("div");
+        headlights.className = "headlights";
+        document.body.appendChild(headlights);
+
+        // Move headlights across the screen
+        let position = 0;
+        const moveInterval = setInterval(() => {
+            position += 5; // Adjust the speed as needed
+            headlights.style.left = position + "px";
+            if (position > window.innerWidth) {
+                position = -headlights.offsetWidth;
+            }
+        }, 50); // Adjust the interval as needed
     }
 
     window.startQuiz = startQuiz;
