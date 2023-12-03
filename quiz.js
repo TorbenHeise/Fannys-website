@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+{
     const headlights = document.createElement("div");
     headlights.className = "headlights";
     document.body.appendChild(headlights);
