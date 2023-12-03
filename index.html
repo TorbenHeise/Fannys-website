@@ -172,10 +172,10 @@
         });
 
         function displayQuestion() {
-            const questionContainer = document.createElement("div");
-            questionContainer.innerHTML = "<span style='font-size: 24px; color: white; text-shadow: 1px 1px 2px black;'>This is a test question.</span>";
-            questionText.innerHTML = '';
-            questionText.appendChild(questionContainer);
+            questionText.textContent = "This is a test question.";
+            questionText.style.fontSize = "24px";
+            questionText.style.color = "white";
+            questionText.style.textShadow = "1px 1px 2px black";
         }
 
         function checkAnswer() {
@@ -218,6 +218,7 @@
         window.checkAnswer = checkAnswer;
     });
 </script>
+
 
 
 
