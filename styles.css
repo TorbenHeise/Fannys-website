@@ -25,13 +25,18 @@
 .headlight4 { animation-delay: 12s; }
 
 @keyframes moveHeadlights {
-    25% {
+    0% {
         top: 0;
         left: 0;
     }
 
-    50% {
+    25% {
         top: 0;
+        left: 100vw;
+    }
+
+    50% {
+        top: 100vh;
         left: 100vw;
     }
 
@@ -41,7 +46,7 @@
     }
 
     100% {
-        top: 100vh;
-        left: 100vw;
+        top: 0;
+        left: 0;
     }
 }
