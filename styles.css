@@ -5,6 +5,7 @@ body {
     background-color: #f0f5fe; /* Light blue background color */
     background-image: url('background.png'); /* Updated image path */
     background-repeat: repeat; /* Adjust as needed */
+    
 }
 
 .fullscreen-button {
@@ -31,4 +32,12 @@ body {
 #question-text {
     margin-bottom: 20px;
     font-size: 18px;
+}
+.headlights {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: red; /* Add a background color */
+    border-radius: 50%;
+    box-shadow: 0 0 20px 10px #ffffff; /* Glow effect */
 }
