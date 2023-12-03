@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secret Santa Quiz</title>
-
     <style>
         body {
             margin: 0;
@@ -15,15 +14,13 @@
         }
 
         .fullscreen-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: block;
             width: 100vw;
             height: 100vh;
             font-size: 48px;
+            padding: 20px;
             background-color: transparent;
-            border: 2px solid white;
-            border-radius: 10px;
+            border: none;
             color: white;
             text-align: center;
             text-transform: uppercase;
@@ -40,45 +37,30 @@
         }
 
         #question-text {
-            margin-bottom: 40px;
-            font-size: 48px;
-            color: white;
-            text-shadow: 2px 2px 4px black;
-            text-align: center;
-        }
-
-        #answer-input {
-            width: 800px;
-            padding: 20px;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
             font-size: 24px;
-            border: 2px solid white;
-            border-radius: 10px;
             color: white;
-            background-color: transparent;
-            text-align: center;
-        }
-
-        button {
-            width: 400px;
-            padding: 20px;
-            background-color: transparent;
-            border: 2px solid white;
-            border-radius: 10px;
-            color: white;
-            font-size: 24px;
-            text-align: center;
-            text-transform: uppercase;
             text-shadow: 1px 1px 2px black;
         }
 
-        #result {
-            font-size: 32px;
-            color: lightgreen;
-            border: 2px solid black;
-            padding: 10px;
-            margin-top: 20px;
-            display: inline-block;
+        .headlights-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            z-index: 1000;
+        }
+
+        .headlights {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: 0 0 20px 10px white;
+            animation: moveHeadlights 16s linear infinite;
         }
     </style>
 </head>
@@ -90,27 +72,106 @@
         <input type="text" id="answer-input" placeholder="Your Answer">
         <button onclick="checkAnswer()">Submit Answer</button>
     </div>
+    <audio id="myAudio" src="openingsong.mp3"></audio>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            const startButton = document.getElementById("startButton");
-            const quizContainer = document.getElementById("quiz-container");
+            const questions = [
+                { question: "What is the capital of France?", answer: "Paris" },
+                { question: "Which planet is known as the Red Planet?", answer: "Mars" },
+                // Add more questions as needed
+            ];
 
-            startButton.addEventListener("click", function () {
-                startButton.style.display = "none";
-                quizContainer.style.display = "flex";
-                displayQuestion();
-            });
+            let currentQuestionIndex = 0;
 
             function displayQuestion() {
                 const questionText = document.getElementById("question-text");
-                questionText.innerHTML = "Your actual question goes here.";
+                questionText.textContent = questions[currentQuestionIndex].question;
+            }
+
+            function startQuiz() {
+                const startButton = document.getElementById("startButton");
+                const quizContainer = document.getElementById("quiz-container");
+                const audio = document.getElementById("myAudio");
+
+                startButton.style.display = "none";
+                quizContainer.style.display = "flex";
+                audio.play();
+
+                startHeadlights(); // Start the headlights when the quiz starts
+                displayQuestion();
             }
 
             function checkAnswer() {
-                alert("Answer checked!");  // Display an alert for diagnostic purposes
+                const userAnswer = document.getElementById("answer-input").value;
+                const correctAnswer = questions[currentQuestionIndex].answer;
+                const resultText = document.getElementById("result");
+
+                if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+                    resultText.textContent = "Correct! Moving to the next question.";
+                    currentQuestionIndex++;
+                    if (currentQuestionIndex < questions.length) {
+                        displayQuestion();
+                    } else {
+                        resultText.textContent = "Congratulations! You've completed the quiz.";
+                    }
+                } else {
+                    resultText.textContent = "Incorrect. Try again.";
+                }
             }
+
+            function startHeadlights() {
+                const headlightsContainer = document.createElement("div");
+                headlightsContainer.className = "headlights-container";
+                document.body.appendChild(headlightsContainer);
+
+                function createHeadlight() {
+                    const headlights = document.createElement("div");
+                    headlights.className = "headlights";
+                    headlightsContainer.appendChild(headlights);
+
+                    let position = Math.random() * window.innerWidth;
+                    let isMovingRight = Math.random() < 0.5;
+                    let isMovingDown = Math.random() < 0.5;
+
+                    function moveHeadlights() {
+                        if (position > window.innerWidth - headlights.offsetWidth) {
+                            isMovingRight = false;
+                        } else if (position < 0) {
+                            isMovingRight = true;
+                        }
+
+                        position += isMovingRight ? 5 : -5;
+                        headlights.style.left = position + "px";
+
+                        if (isMovingDown) {
+                            if (headlights.offsetTop + headlights.offsetHeight < window.innerHeight) {
+                                headlights.style.top = headlights.offsetTop + 2 + "px";
+                            } else {
+                                isMovingDown = false;
+                            }
+                        } else {
+                            if (headlights.offsetTop > 0) {
+                                headlights.style.top = headlights.offsetTop - 2 + "px";
+                            } else {
+                                isMovingDown = true;
+                            }
+                        }
+                    }
+
+                    setInterval(moveHeadlights, 50);
+                }
+
+                // Create four headlights
+                for (let i = 0; i < 4; i++) {
+                    createHeadlight();
+                }
+            }
+
+            window.startQuiz = startQuiz;
+            window.checkAnswer = checkAnswer;
         });
+
     </script>
 </body>
 </html>
