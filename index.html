@@ -172,18 +172,15 @@
                 displayQuestion();
             });
 
-          function displayQuestion() {
-    const questionContainer = document.createElement("div");
-    questionContainer.id = "question-container";  // Add an ID for easy targeting
-    questionContainer.style.fontSize = "48px";  // Adjust font size
+         function displayQuestion() {
+    const questionContainer = document.getElementById("question-container");
+    questionContainer.style.fontSize = "48px";
     questionContainer.style.color = "white";
     questionContainer.style.textShadow = "2px 2px 4px black";
-    questionContainer.style.textAlign = "center";  // Center the text
-    questionContainer.textContent = "Your actual question goes here.";  // Replace with your actual question
-
-    questionText.innerHTML = ''; // Clear existing content
-    questionText.appendChild(questionContainer);
+    questionContainer.style.textAlign = "center";
+    questionContainer.textContent = "Your actual question goes here.";
 }
+
 
             function checkAnswer() {
                 alert("Answer checked!");  // Display an alert for diagnostic purposes
