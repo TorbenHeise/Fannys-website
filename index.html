@@ -138,8 +138,9 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const questions = [
-                { question: "What is the capital of France?", answer: "Paris" },
-                { question: "Which planet is known as the Red Planet?", answer: "Mars" },
+                { question: "Hey Fanny, let's do a little virtual escape room to get to your present. Solve the 3 soduko-fields.", answer: "731" },
+                { question: "Can you follow the dice?", answer: "1" },
+		{ question: "Great! Now the final question: can you unlock the lock to get your present?", answer: "394" },
                 // Add more questions as needed
             ];
 
@@ -174,7 +175,7 @@
                     if (currentQuestionIndex < questions.length) {
                         displayQuestion();
                     } else {
-                        resultText.textContent = "Congratulations! You've completed the quiz.";
+                        resultText.textContent = "Congratulations! You've completed the quiz. The key is actually under glued under your present...";
                     }
                 } else {
                     resultText.textContent = "Incorrect. Try again.";
