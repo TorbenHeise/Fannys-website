@@ -35,6 +35,34 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function startHeadlights() {
         // Your existing startHeadlights function
+        function startHeadlights() {
+    const headlightsContainer = document.createElement("div");
+    headlightsContainer.className = "headlights-container";
+    document.body.appendChild(headlightsContainer);
+
+    for (let i = 0; i < 4; i++) {
+        const headlights = document.createElement("div");
+        headlights.className = "headlights";
+        headlightsContainer.appendChild(headlights);
+
+        let position = 0;
+        let isMovingRight = true;
+
+        function moveHeadlights() {
+            if (position > window.innerWidth / 2 - headlights.offsetWidth) {
+                isMovingRight = false;
+            } else if (position < -window.innerWidth / 2) {
+                isMovingRight = true;
+            }
+
+            position += isMovingRight ? 5 : -5;
+            headlights.style.left = position + "px";
+        }
+
+        setInterval(moveHeadlights, 50);
+    }
+}
+
     }
 
     // Expose the startQuiz and checkAnswer functions globally
