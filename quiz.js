@@ -77,4 +77,30 @@ document.addEventListener("DOMContentLoaded", function() {
 
     window.startQuiz = startQuiz;
     window.checkAnswer = checkAnswer;
+    document.addEventListener("DOMContentLoaded", function() {
+    // ... (existing code)
+
+    function startHeadlights() {
+        const headlightsContainer = document.createElement("div");
+        headlightsContainer.className = "headlights-container";
+        document.body.appendChild(headlightsContainer);
+
+        function createHeadlight() {
+            const headlights = document.createElement("div");
+            headlights.className = "headlights";
+            headlightsContainer.appendChild(headlights);
+
+            // ... (existing code for moving headlights)
+        }
+
+        // Create four headlights
+        for (let i = 0; i < 4; i++) {
+            createHeadlight();
+        }
+    }
+
+    window.startQuiz = startQuiz;
+    window.checkAnswer = checkAnswer;
+});
+
 });
