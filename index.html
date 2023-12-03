@@ -167,19 +167,55 @@
             startButton.style.display = "none";
             quizContainer.style.display = "flex";
             audio.play();
-            alert("Button clicked!");  // Display an alert for diagnostic purposes
+            startHeadlights();
             displayQuestion();
         });
 
         function displayQuestion() {
-            questionText.textContent = "This is a test question.";
+            questionText.innerHTML = "<span style='font-size: 24px; color: white; text-shadow: 1px 1px 2px black;'>This is a test question.</span>";
         }
 
-        window.checkAnswer = function () {
+        function checkAnswer() {
             alert("Answer checked!");  // Display an alert for diagnostic purposes
-        };
+        }
+
+        function startHeadlights() {
+            const headlightsContainer = document.createElement("div");
+            headlightsContainer.className = "headlights-container";
+            document.body.appendChild(headlightsContainer);
+
+            function createHeadlight() {
+                const headlights = document.createElement("div");
+                headlights.className = "headlights";
+                headlightsContainer.appendChild(headlights);
+
+                let position = Math.random() * window.innerWidth / 2;
+                let isMovingRight = true;
+
+                function moveHeadlights() {
+                    if (position > window.innerWidth / 2 - headlights.offsetWidth) {
+                        isMovingRight = false;
+                    } else if (position < 0) {
+                        isMovingRight = true;
+                    }
+
+                    position += isMovingRight ? 5 : -5;
+                    headlights.style.left = position + "px";
+                }
+
+                setInterval(moveHeadlights, 50);
+            }
+
+            // Create four headlights
+            for (let i = 0; i < 4; i++) {
+                createHeadlight();
+            }
+        }
+
+        window.checkAnswer = checkAnswer;
     });
 </script>
+
 
 
 
