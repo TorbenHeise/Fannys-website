@@ -1,33 +1,9 @@
-#quiz-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
-
-#question-text {
-    margin-bottom: 2em; /* Twice as big */
-    font-size: 2em; /* Twice as big */
-    color: white;
-    text-shadow: 2px 2px 4px black; /* Added black shadow for contrast */
-}
-
-#answer-input,
-button {
-    width: 50%; /* Adjust as needed for responsiveness */
-    max-width: 400px; /* Limit maximum width for larger screens */
-    padding: 1em;
-    margin-bottom: 1em; /* Adjust as needed for spacing */
-    font-size: 1em; /* Adjust as needed for font size */
-}
-
 .headlights-container {
     position: fixed;
     top: 0;
     left: 0;
-    width: 50vw; /* Adjusted to 50% width */
-    height: 50vh; /* Adjusted to 50% height */
+    width: 100vw;
+    height: 100vh;
     overflow: hidden;
     z-index: 1000;
 }
@@ -36,9 +12,36 @@ button {
     position: absolute;
     width: 8vw; /* Adjusted for responsiveness */
     height: 8vw; /* Adjusted for responsiveness */
-    background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent white */
+    background-color: white; /* Set to white */
     border: 0.4em solid white; /* White border */
     border-radius: 50%;
     box-shadow: 0 0 2em 1em white; /* Glow effect */
     animation: moveHeadlights 4s linear infinite; /* Doubled the speed */
+}
+
+.headlight1 { animation-delay: 0s; }
+.headlight2 { animation-delay: 1s; }
+.headlight3 { animation-delay: 2s; }
+.headlight4 { animation-delay: 3s; }
+
+@keyframes moveHeadlights {
+    25% {
+        top: 0;
+        left: 0;
+    }
+
+    50% {
+        top: 0;
+        left: 100%;
+    }
+
+    75% {
+        top: 100%;
+        left: 0;
+    }
+
+    100% {
+        top: 100%;
+        left: 100%;
+    }
 }
