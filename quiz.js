@@ -13,59 +13,66 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function startQuiz() {
+        const startButton = document.getElementById("startButton");
         const quizContainer = document.getElementById("quiz-container");
         const audio = document.getElementById("myAudio");
 
-        // Hide the quiz container initially
-        quizContainer.style.display = "none";
-
-        // Play audio when the quiz starts
+        startButton.style.display = "none";
+        quizContainer.style.display = "block";
         audio.play();
-
-        // Display the first question
         displayQuestion();
-
-        // Start the headlights
-        startHeadlights();
+        startHeadlights();  // Call startHeadlights when the quiz starts
     }
 
     function checkAnswer() {
-        // Your existing checkAnswer function
+        const userAnswer = document.getElementById("answer-input").value;
+        const correctAnswer = questions[currentQuestionIndex].answer;
+        const resultText = document.getElementById("result");
+
+        if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+            resultText.textContent = "Correct! Moving to the next question.";
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                displayQuestion();
+            } else {
+                resultText.textContent = "Congratulations! You've completed the quiz.";
+            }
+        } else {
+            resultText.textContent = "Incorrect. Try again.";
+        }
     }
 
     function startHeadlights() {
-        // Your existing startHeadlights function
-        function startHeadlights() {
-    const headlightsContainer = document.createElement("div");
-    headlightsContainer.className = "headlights-container";
-    document.body.appendChild(headlightsContainer);
+        const headlightsContainer = document.createElement("div");
+        headlightsContainer.className = "headlights-container";
+        document.body.appendChild(headlightsContainer);
 
-    for (let i = 0; i < 4; i++) {
-        const headlights = document.createElement("div");
-        headlights.className = "headlights";
-        headlightsContainer.appendChild(headlights);
+        function createHeadlight() {
+            const headlights = document.createElement("div");
+            headlights.className = "headlights";
+            headlightsContainer.appendChild(headlights);
 
-        let position = 0;
-        let isMovingRight = true;
+            let position = 0;
+            let isMovingRight = true;
 
-        function moveHeadlights() {
-            if (position > window.innerWidth / 2 - headlights.offsetWidth) {
-                isMovingRight = false;
-            } else if (position < -window.innerWidth / 2) {
-                isMovingRight = true;
+            function moveHeadlights() {
+                if (position > window.innerWidth / 2 - headlights.offsetWidth) {
+                    isMovingRight = false;
+                } else if (position < -window.innerWidth / 2) {
+                    isMovingRight = true;
+                }
+
+                position += isMovingRight ? 5 : -5;
+                headlights.style.left = position + "px";
             }
 
-            position += isMovingRight ? 5 : -5;
-            headlights.style.left = position + "px";
+            setInterval(moveHeadlights, 50);
         }
 
-        setInterval(moveHeadlights, 50);
-    }
-}
-
+        // Call createHeadlight function only once when the quiz starts
+        createHeadlight();
     }
 
-    // Expose the startQuiz and checkAnswer functions globally
     window.startQuiz = startQuiz;
     window.checkAnswer = checkAnswer;
 });
