@@ -37,10 +37,46 @@
         }
 
         #question-text {
-            margin-bottom: 20px;
-            font-size: 24px;
+            margin-bottom: 40px; /* Increased margin */
+            font-size: 48px; /* Doubled font size */
             color: white;
+            text-shadow: 2px 2px 4px black;
+            text-align: center;
+            background-color: transparent; /* Remove any background color */
+            padding: 20px; /* Add padding */
+        }
+
+        #answer-input {
+            width: 800px;
+            padding: 20px;
+            margin-bottom: 40px;
+            font-size: 24px;
+            border: 2px solid white;
+            border-radius: 10px;
+            color: white;
+            background-color: transparent;
+            text-align: center;
+        }
+
+        button {
+            width: 400px;
+            padding: 20px;
+            background-color: transparent;
+            border: 2px solid white;
+            border-radius: 10px;
+            color: white;
+            font-size: 24px;
+            text-align: center;
+            text-transform: uppercase;
             text-shadow: 1px 1px 2px black;
+        }
+
+        #result {
+            font-size: 48px; /* Doubled font size */
+            color: lightgreen; /* Light green color */
+            margin-top: 40px; /* Increased margin */
+            display: inline-block;
+            text-align: center; /* Center the text */
         }
 
         .headlights-container {
@@ -50,7 +86,7 @@
             width: 100vw;
             height: 100vh;
             overflow: hidden;
-            pointer-events: none; /* This prevents the headlights from blocking interactions */
+            pointer-events: none;
         }
 
         .headlights {
@@ -98,7 +134,7 @@
                 quizContainer.style.display = "flex";
                 audio.play();
 
-                startHeadlights(); // Start the headlights when the quiz starts
+                startHeadlights();
                 displayQuestion();
             }
 
@@ -171,7 +207,6 @@
             window.startQuiz = startQuiz;
             window.checkAnswer = checkAnswer;
         });
-
     </script>
 </body>
 </html>
