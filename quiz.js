@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const audio = document.getElementById("myAudio");
 
         startButton.style.display = "none";
-        quizContainer.style.display = "block";
+        quizContainer.style.display = "flex";
         audio.play();
         startHeadlights();  // Start the headlights when the quiz starts
         displayQuestion();
