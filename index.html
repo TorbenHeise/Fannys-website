@@ -5,153 +5,146 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secret Santa Quiz</title>
 
-    
-   <style>
-    body {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        background-image: url('background.png');
-        background-repeat: repeat;
-    }
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-image: url('background.png');
+            background-repeat: repeat;
+        }
 
-    .fullscreen-button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100vw;
-        height: 100vh;
-        font-size: 48px;
-        background-color: transparent;
-        border: 2px solid white;
-        border-radius: 10px;
-        color: white;
-        text-align: center;
-        text-transform: uppercase;
-        text-shadow: 2px 2px 4px black;
-    }
+        .fullscreen-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            height: 100vh;
+            font-size: 48px;
+            background-color: transparent;
+            border: 2px solid white;
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px black;
+        }
 
-    #quiz-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        display: none;
-    }
+        #quiz-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            display: none;
+        }
 
-    #question-text {
-        margin-bottom: 40px;
-        font-size: 48px;
-        color: white;
-        text-shadow: 2px 2px 4px black;
-        text-align: center;
-            #question-text {
-        /* ... (existing styles) */
-        background-color: transparent; /* Add this line to set the background to transparent */
-    }
+        #question-text {
+            margin-bottom: 40px;
+            font-size: 48px;
+            color: white;
+            text-shadow: 2px 2px 4px black;
+            text-align: center;
+            background-color: transparent; /* Add this line to set the background to transparent */
+        }
 
-    /* ... (rest of the existing styles) */
-    }
+        #answer-input {
+            width: 800px;
+            padding: 20px;
+            margin-bottom: 40px;
+            font-size: 24px;
+            border: 2px solid white;
+            border-radius: 10px;
+            color: white;
+            background-color: transparent;
+            text-align: center;
+        }
 
-    #answer-input {
-        width: 800px;
-        padding: 20px;
-        margin-bottom: 40px;
-        font-size: 24px;
-        border: 2px solid white;
-        border-radius: 10px;
-        color: white;
-        background-color: transparent;
-        text-align: center;
-    }
+        button {
+            width: 400px;
+            padding: 20px;
+            background-color: transparent;
+            border: 2px solid white;
+            border-radius: 10px;
+            color: white;
+            font-size: 24px;
+            text-align: center;
+            text-transform: uppercase;
+            text-shadow: 1px 1px 2px black;
+        }
 
-    button {
-        width: 400px;
-        padding: 20px;
-        background-color: transparent;
-        border: 2px solid white;
-        border-radius: 10px;
-        color: white;
-        font-size: 24px;
-        text-align: center;
-        text-transform: uppercase;
-        text-shadow: 1px 1px 2px black;
-    }
+        #result {
+            font-size: 32px;
+            color: lightgreen;
+            border: 2px solid black;
+            padding: 10px;
+            margin-top: 20px;
+            display: inline-block; /* Display inline to have a border around each letter */
+        }
 
-    #result {
-        font-size: 32px;
-        color: lightgreen;
-        border: 2px solid black;
-        padding: 10px;
-        margin-top: 20px;
-        display: inline-block; /* Display inline to have a border around each letter */
-    }
-
-    .headlights-container {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        overflow: hidden;
-        z-index: 1000;
-    }
-
-    .headlights {
-        position: absolute;
-        width: 200px;
-        height: 200px;
-        background-color: white;
-        border-radius: 50%;
-        box-shadow: 0 0 20px 10px white;
-        animation: moveHeadlights 16s linear infinite;
-        display: none;
-    }
-
-    .headlight1 { animation-delay: 0s; }
-    .headlight2 { animation-delay: 4s; }
-    .headlight3 { animation-delay: 8s; }
-    .headlight4 { animation-delay: 12s; }
-
-    @keyframes moveHeadlights {
-        0% {
+        .headlights-container {
+            position: fixed;
             top: 0;
             left: 0;
-            opacity: 1;
-            visibility: visible;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            z-index: 1000;
         }
 
-        25% {
-            top: 0;
-            left: 100vw;
-            opacity: 0;
-            visibility: hidden;
+        .headlights {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: 0 0 20px 10px white;
+            animation: moveHeadlights 16s linear infinite;
+            display: none;
         }
 
-        50% {
-            top: 100vh;
-            left: 100vw;
-            opacity: 0;
-            visibility: hidden;
-        }
+        .headlight1 { animation-delay: 0s; }
+        .headlight2 { animation-delay: 4s; }
+        .headlight3 { animation-delay: 8s; }
+        .headlight4 { animation-delay: 12s; }
 
-        75% {
-            top: 100vh;
-            left: 0;
-            opacity: 0;
-            visibility: hidden;
-        }
+        @keyframes moveHeadlights {
+            0% {
+                top: 0;
+                left: 0;
+                opacity: 1;
+                visibility: visible;
+            }
 
-        100% {
-            top: 0;
-            left: 0;
-            opacity: 1;
-            visibility: visible;
-        }
-    }
-</style>
+            25% {
+                top: 0;
+                left: 100vw;
+                opacity: 0;
+                visibility: hidden;
+            }
 
+            50% {
+                top: 100vh;
+                left: 100vw;
+                opacity: 0;
+                visibility: hidden;
+            }
+
+            75% {
+                top: 100vh;
+                left: 0;
+                opacity: 0;
+                visibility: hidden;
+            }
+
+            100% {
+                top: 0;
+                left: 0;
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    </style>
 </head>
 <body>
     <button id="startButton" onclick="startQuiz()" class="fullscreen-button">Welcome Fanny, here is your Secret Santa quiz!</button>
@@ -161,81 +154,74 @@
         <input type="text" id="answer-input" placeholder="Your Answer">
         <button onclick="checkAnswer()">Submit Answer</button>
     </div>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const audio = document.getElementById("myAudio");
-        const startButton = document.getElementById("startButton");
-        const quizContainer = document.getElementById("quiz-container");
-        const questionText = document.getElementById("question-text");
 
-        startButton.addEventListener("click", function () {
-            startButton.style.display = "none";
-            quizContainer.style.display = "flex";
-            audio.play();
-            startHeadlights();
-            displayQuestion();
-        });
+    <audio id="myAudio" src="openingsong.mp3"></audio>
 
-        function displayQuestion() {
-            const questionContainer = document.createElement("div");
-            questionContainer.style.fontSize = "24px";
-            questionContainer.style.color = "white";
-            questionContainer.style.textShadow = "1px 1px 2px black";
-            questionContainer.textContent = "This is a test question.";
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const audio = document.getElementById("myAudio");
+            const startButton = document.getElementById("startButton");
+            const quizContainer = document.getElementById("quiz-container");
+            const questionText = document.getElementById("question-text");
 
-            questionText.innerHTML = ''; // Clear existing content
-            questionText.appendChild(questionContainer);
-        }
+            startButton.addEventListener("click", function () {
+                startButton.style.display = "none";
+                quizContainer.style.display = "flex";
+                audio.play();
+                startHeadlights();
+                displayQuestion();
+            });
 
-        function checkAnswer() {
-            alert("Answer checked!");  // Display an alert for diagnostic purposes
-        }
+            function displayQuestion() {
+                const questionContainer = document.createElement("div");
+                questionContainer.style.fontSize = "24px";
+                questionContainer.style.color = "white";
+                questionContainer.style.textShadow = "1px 1px 2px black";
+                questionContainer.textContent = "This is a test question.";
 
-        function startHeadlights() {
-            const headlightsContainer = document.createElement("div");
-            headlightsContainer.className = "headlights-container";
-            document.body.appendChild(headlightsContainer);
+                questionText.innerHTML = ''; // Clear existing content
+                questionText.appendChild(questionContainer);
+            }
 
-            function createHeadlight() {
-                const headlights = document.createElement("div");
-                headlights.className = "headlights";
-                headlightsContainer.appendChild(headlights);
+            function checkAnswer() {
+                alert("Answer checked!");  // Display an alert for diagnostic purposes
+            }
 
-                let position = Math.random() * window.innerWidth / 2;
-                let isMovingRight = true;
+            function startHeadlights() {
+                const headlightsContainer = document.createElement("div");
+                headlightsContainer.className = "headlights-container";
+                document.body.appendChild(headlightsContainer);
 
-                function moveHeadlights() {
-                    if (position > window.innerWidth / 2 - headlights.offsetWidth) {
-                        isMovingRight = false;
-                    } else if (position < 0) {
-                        isMovingRight = true;
+                function createHeadlight() {
+                    const headlights = document.createElement("div");
+                    headlights.className = "headlights";
+                    headlightsContainer.appendChild(headlights);
+
+                    let position = Math.random() * window.innerWidth / 2;
+                    let isMovingRight = true;
+
+                    function moveHeadlights() {
+                        if (position > window.innerWidth / 2 - headlights.offsetWidth) {
+                            isMovingRight = false;
+                        } else if (position < 0) {
+                            isMovingRight = true;
+                        }
+
+                        position += isMovingRight ? 5 : -5;
+                        headlights.style.left = position + "px";
                     }
 
-                    position += isMovingRight ? 5 : -5;
-                    headlights.style.left = position + "px";
+                    setInterval(moveHeadlights, 50);
                 }
 
-                setInterval(moveHeadlights, 50);
+                // Create four headlights
+                for (let i = 0; i < 4; i++) {
+                    createHeadlight();
+                }
             }
 
-            // Create four headlights
-            for (let i = 0; i < 4; i++) {
-                createHeadlight();
-            }
-        }
-
-        window.checkAnswer = checkAnswer;
-    });
-    
-</script>
-
-
-
-
-
-
-
-
-
+            window.checkAnswer = checkAnswer;
+        });
+    </script>
 </body>
 </html>
