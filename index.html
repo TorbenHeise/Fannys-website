@@ -158,13 +158,78 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
+        const audio = document.getElementById("myAudio");
         const startButton = document.getElementById("startButton");
+        const quizContainer = document.getElementById("quiz-container");
+        const questionText = document.getElementById("question-text");
 
         startButton.addEventListener("click", function () {
-            alert("Button clicked!");  // Display an alert for diagnostic purposes
+            startButton.style.display = "none";
+            quizContainer.style.display = "flex";
+            audio.play();
+            startHeadlights();
+            displayQuestion();
         });
+
+        function displayQuestion() {
+            questionText.textContent = questions[currentQuestionIndex].question;
+        }
+
+        function checkAnswer() {
+            const userAnswer = document.getElementById("answer-input").value;
+            const correctAnswer = questions[currentQuestionIndex].answer;
+            const resultText = document.getElementById("result");
+
+            if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+                resultText.innerHTML = "<span style='color: lightgreen; border: 2px solid black; padding: 10px;'>Correct! Moving to the next question.</span>";
+                currentQuestionIndex++;
+                if (currentQuestionIndex < questions.length) {
+                    displayQuestion();
+                } else {
+                    resultText.innerHTML = "<span style='color: lightgreen; border: 2px solid black; padding: 10px;'>Congratulations! You've completed the quiz.</span>";
+                }
+            } else {
+                resultText.innerHTML = "<span style='color: lightgreen; border: 2px solid black; padding: 10px;'>Incorrect. Try again.</span>";
+            }
+        }
+
+        function startHeadlights() {
+            const headlightsContainer = document.createElement("div");
+            headlightsContainer.className = "headlights-container";
+            document.body.appendChild(headlightsContainer);
+
+            function createHeadlight() {
+                const headlights = document.createElement("div");
+                headlights.className = "headlights";
+                headlightsContainer.appendChild(headlights);
+
+                let position = Math.random() * window.innerWidth / 2;
+                let isMovingRight = true;
+
+                function moveHeadlights() {
+                    if (position > window.innerWidth / 2 - headlights.offsetWidth) {
+                        isMovingRight = false;
+                    } else if (position < 0) {
+                        isMovingRight = true;
+                    }
+
+                    position += isMovingRight ? 5 : -5;
+                    headlights.style.left = position + "px";
+                }
+
+                setInterval(moveHeadlights, 50);
+            }
+
+            // Create four headlights
+            for (let i = 0; i < 4; i++) {
+                createHeadlight();
+            }
+        }
+
+        window.checkAnswer = checkAnswer;
     });
 </script>
+
 
 
 
