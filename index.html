@@ -99,32 +99,35 @@
     .headlight3 { animation-delay: 8s; }
     .headlight4 { animation-delay: 12s; }
 
-    @keyframes moveHeadlights {
-        0% {
-            top: 0;
-            left: 0;
-        }
-
-        25% {
-            top: 0;
-            left: 100vw;
-        }
-
-        50% {
-            top: 100vh;
-            left: 100vw;
-        }
-
-        75% {
-            top: 100vh;
-            left: 0;
-        }
-
-        100% {
-            top: 0;
-            left: 0;
-        }
+  @keyframes moveHeadlights {
+    0% {
+        top: 0;
+        left: 0;
+        display: block; /* Show the headlights at the start */
     }
+
+    25% {
+        top: 0;
+        left: 100vw;
+    }
+
+    50% {
+        top: 100vh;
+        left: 100vw;
+    }
+
+    75% {
+        top: 100vh;
+        left: 0;
+    }
+
+    100% {
+        top: 0;
+        left: 0;
+        display: none; /* Hide the headlights at the end */
+    }
+}
+
 
     @keyframes flicker {
         0%, 5%, 10%, 15%, 20%, 25%, 30%, 35%, 40%, 45%, 50%, 55%, 60%, 65%, 70%, 75%, 80%, 85%, 90%, 95%, 100% {
