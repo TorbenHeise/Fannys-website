@@ -155,7 +155,6 @@
         <input type="text" id="answer-input" placeholder="Your Answer">
         <button onclick="checkAnswer()">Submit Answer</button>
     </div>
-
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const audio = document.getElementById("myAudio");
@@ -172,10 +171,14 @@
         });
 
         function displayQuestion() {
-            questionText.textContent = "This is a test question.";
-            questionText.style.fontSize = "24px";
-            questionText.style.color = "white";
-            questionText.style.textShadow = "1px 1px 2px black";
+            const questionContainer = document.createElement("div");
+            questionContainer.style.fontSize = "24px";
+            questionContainer.style.color = "white";
+            questionContainer.style.textShadow = "1px 1px 2px black";
+            questionContainer.textContent = "This is a test question.";
+
+            questionText.innerHTML = ''; // Clear existing content
+            questionText.appendChild(questionContainer);
         }
 
         function checkAnswer() {
