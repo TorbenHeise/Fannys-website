@@ -1,82 +1,87 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <head>
-    <!-- ... (existing code) -->
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <!-- ... (existing code) -->
-</head>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const questions = [
+            { question: "What is the capital of France?", answer: "Paris" },
+            { question: "Which planet is known as the Red Planet?", answer: "Mars" },
+            // Add more questions as needed
+        ];
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secret Santa Quiz</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-image: url('background.png'); /* Updated full relative path */
-            background-repeat: repeat;
+        let currentQuestionIndex = 0;
+
+        function displayQuestion() {
+            const questionText = document.getElementById("question-text");
+            questionText.textContent = questions[currentQuestionIndex].question;
         }
 
-        .fullscreen-button {
-            display: block;
-            width: 100vw;
-            height: 100vh;
-            font-size: 48px; /* Twice as big */
-            padding: 20px;
-            background-color: transparent;
-            border: none;
-            color: white;
-            text-align: center;
-            text-transform: uppercase;
-            text-shadow: 2px 2px 4px black; /* Added black shadow for contrast */
+        function startQuiz() {
+            const startButton = document.getElementById("startButton");
+            const quizContainer = document.getElementById("quiz-container");
+            const audio = document.getElementById("myAudio");
+
+            startButton.style.display = "none";
+            quizContainer.style.display = "flex";
+            audio.play();
+
+            startHeadlights(); // Start the headlights when the quiz starts
+            displayQuestion();
         }
 
-        #quiz-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
+        function checkAnswer() {
+            const userAnswer = document.getElementById("answer-input").value;
+            const correctAnswer = questions[currentQuestionIndex].answer;
+            const resultText = document.getElementById("result");
+
+            if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+                resultText.textContent = "Correct! Moving to the next question.";
+                currentQuestionIndex++;
+                if (currentQuestionIndex < questions.length) {
+                    displayQuestion();
+                } else {
+                    resultText.textContent = "Congratulations! You've completed the quiz.";
+                }
+            } else {
+                resultText.textContent = "Incorrect. Try again.";
+            }
         }
 
-        #question-text {
-            margin-bottom: 20px;
-            font-size: 24px; /* Half the size of the welcome message */
-            color: white;
-            text-shadow: 1px 1px 2px black; /* Added black shadow for contrast */
+        function startHeadlights() {
+            const headlightsContainer = document.createElement("div");
+            headlightsContainer.className = "headlights-container";
+            document.body.appendChild(headlightsContainer);
+
+            function createHeadlight() {
+                const headlights = document.createElement("div");
+                headlights.className = "headlights";
+                headlightsContainer.appendChild(headlights);
+
+                let position = Math.random() * window.innerWidth / 2;
+                let isMovingRight = true;
+
+                function moveHeadlights() {
+                    if (position > window.innerWidth / 2 - headlights.offsetWidth) {
+                        isMovingRight = false;
+                    } else if (position < 0) {
+                        isMovingRight = true;
+                    }
+
+                    position += isMovingRight ? 5 : -5;
+                    headlights.style.left = position + "px";
+                }
+
+                setInterval(moveHeadlights, 50);
+            }
+
+            // Create four headlights
+            for (let i = 0; i < 4; i++) {
+                createHeadlight();
+            }
         }
 
-        .headlights-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-            z-index: 1000;
-        }
+        window.startQuiz = startQuiz;
+        window.checkAnswer = checkAnswer;
+        window.startHeadlights = startHeadlights; // Expose startHeadlights globally
 
-        .headlights {
-            position: absolute;
-            width: 200px; /* Four times as big */
-            height: 200px; /* Four times as big */
-            background-color: red; /* Add a background color */
-            border-radius: 50%;
-            box-shadow: 0 0 20px 10px #ffffff; /* Glow effect */
-        }
-    </style>
-</head>
-<body style="margin: 0; padding: 0; overflow: hidden; background-image: url('background.png'); background-repeat: repeat;">
-    <button id="startButton" onclick="startQuiz()" class="fullscreen-button">Welcome Fanny, here is your Secret Santa quiz!</button>
-    <div id="quiz-container" style="display: none;">
-        <div id="result"></div>
-        <div id="question-text"></div>
-        <input type="text" id="answer-input" placeholder="Your Answer">
-        <button onclick="checkAnswer()">Submit Answer</button>
-    </div>
-    <audio id="myAudio" src="openingsong.mp3"></audio>
-    <script src="quiz.js"></script>
-</body>
-</html>
+        // ... (existing code)
+
+    });
+</script>
