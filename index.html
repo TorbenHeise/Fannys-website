@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secret Santa Quiz</title>
-
     <style>
         body {
             margin: 0;
@@ -47,13 +46,6 @@
             text-align: center;
         }
 
-        #question-text div {
-            font-size: 24px;
-            color: white;
-            text-shadow: 1px 1px 2px black;
-            text-align: center;
-        }
-
         #answer-input {
             width: 800px;
             padding: 20px;
@@ -77,15 +69,6 @@
             text-align: center;
             text-transform: uppercase;
             text-shadow: 1px 1px 2px black;
-        }
-
-        #result {
-            font-size: 32px;
-            color: lightgreen;
-            border: 2px solid black;
-            padding: 10px;
-            margin-top: 20px;
-            display: inline-block; /* Display inline to have a border around each letter */
         }
 
         .headlights-container {
@@ -161,69 +144,72 @@
         <button onclick="checkAnswer()">Submit Answer</button>
     </div>
     <audio id="myAudio" src="openingsong.mp3"></audio>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const audio = document.getElementById("myAudio");
+            const startButton = document.getElementById("startButton");
+            const quizContainer = document.getElementById("quiz-container");
+            const questionText = document.getElementById("question-text");
 
-    
- <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const audio = document.getElementById("myAudio");
-        const startButton = document.getElementById("startButton");
-        const quizContainer = document.getElementById("quiz-container");
-        const questionText = document.getElementById("question-text");
+            startButton.addEventListener("click", function () {
+                startButton.style.display = "none";
+                quizContainer.style.display = "flex";
+                audio.play();
+                startHeadlights();
+                displayQuestion();
+            });
 
-        startButton.addEventListener("click", function () {
-            startButton.style.display = "none";
-            quizContainer.style.display = "flex";
-            audio.play();
-            startHeadlights();
-            displayQuestion();
-        });
+            function displayQuestion() {
+                questionText.innerHTML = ''; // Clear existing content
 
-        function displayQuestion() {
-            questionText.innerHTML = ''; // Clear existing content
+                const questionContainer = document.createElement("div");
+                questionContainer.style.fontSize = "48px";
+                questionContainer.style.color = "white";
+                questionContainer.style.textShadow = "2px 2px 4px black";
+                questionContainer.textContent = "Your actual question goes here.";
 
-            const questionContainer = document.createElement("div");
-            questionContainer.style.fontSize = "24px";
-            questionContainer.style.color = "white";
-            questionContainer.style.textShadow = "1px 1px 2px black";
-            questionContainer.textContent = "Your actual question goes here.";
-
-            questionText.appendChild(questionContainer);
-        }
-
-        function checkAnswer() {
-            alert("Answer checked!");  // Display an alert for diagnostic purposes
-        }
-
-        function startHeadlights() {
-            const headlightsContainer = document.createElement("div");
-            headlightsContainer.className = "headlights-container";
-            document.body.appendChild(headlightsContainer);
-
-            function createHeadlight() {
-                const headlights = document.createElement("div");
-                headlights.className = "headlights";
-                headlightsContainer.appendChild(headlights);
-
-                let position = Math.random() * window.innerWidth / 2;
-                let isMovingRight = true;
-
-                function moveHeadlights() {
-                    if (position > window.innerWidth / 2 - headlights.offsetWidth) {
-                        isMovingRight = false;
-                    } else if (position < 0) {
-                        isMovingRight = true;
-                    }
-
-                    position += isMovingRight ? 5 : -5;
-                    headlights.style.left = position + "px";
-                }
-
-                setInterval(moveHeadlights, 50);
+                questionText.appendChild(questionContainer);
             }
 
-            // Create four headlights
-            for (let i = 0; i < 4; i++) {
-                createHeadlight(
+            function checkAnswer() {
+                alert("Answer checked!");  // Display an alert for diagnostic purposes
+            }
 
+            function startHeadlights() {
+                const headlightsContainer = document.createElement("div");
+                headlightsContainer.className = "headlights-container";
+                document.body.appendChild(headlightsContainer);
+
+                function createHeadlight() {
+                    const headlights = document.createElement("div");
+                    headlights.className = "headlights";
+                    headlightsContainer.appendChild(headlights);
+
+                    let position = Math.random() * window.innerWidth / 2;
+                    let isMovingRight = true;
+
+                    function moveHeadlights() {
+                        if (position > window.innerWidth / 2 - headlights.offsetWidth) {
+                            isMovingRight = false;
+                        } else if (position < 0) {
+                            isMovingRight = true;
+                        }
+
+                        position += isMovingRight ? 5 : -5;
+                        headlights.style.left = position + "px";
+                    }
+
+                    setInterval(moveHeadlights, 50);
+                }
+
+                // Create four headlights
+                for (let i = 0; i < 4; i++) {
+                    createHeadlight();
+                }
+            }
+
+            window.checkAnswer = checkAnswer;
+        });
+    </script>
 </body>
 </html>
