@@ -60,6 +60,7 @@
             background-color: white;
             border-radius: 50%;
             box-shadow: 0 0 20px 10px white;
+            animation: moveHeadlights 16s linear infinite;
         }
     </style>
 </head>
@@ -75,6 +76,12 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
+            const questions = [
+                { question: "What is the capital of France?", answer: "Paris" },
+                { question: "Which planet is known as the Red Planet?", answer: "Mars" },
+                // Add more questions as needed
+            ];
+
             let currentQuestionIndex = 0;
 
             function displayQuestion() {
@@ -123,11 +130,12 @@
                     headlights.className = "headlights";
                     headlightsContainer.appendChild(headlights);
 
-                    let position = Math.random() * window.innerWidth / 2;
-                    let isMovingRight = true;
+                    let position = Math.random() * window.innerWidth;
+                    let isMovingRight = Math.random() < 0.5;
+                    let isMovingDown = Math.random() < 0.5;
 
                     function moveHeadlights() {
-                        if (position > window.innerWidth / 2 - headlights.offsetWidth) {
+                        if (position > window.innerWidth - headlights.offsetWidth) {
                             isMovingRight = false;
                         } else if (position < 0) {
                             isMovingRight = true;
@@ -135,6 +143,20 @@
 
                         position += isMovingRight ? 5 : -5;
                         headlights.style.left = position + "px";
+
+                        if (isMovingDown) {
+                            if (headlights.offsetTop + headlights.offsetHeight < window.innerHeight) {
+                                headlights.style.top = headlights.offsetTop + 2 + "px";
+                            } else {
+                                isMovingDown = false;
+                            }
+                        } else {
+                            if (headlights.offsetTop > 0) {
+                                headlights.style.top = headlights.offsetTop - 2 + "px";
+                            } else {
+                                isMovingDown = true;
+                            }
+                        }
                     }
 
                     setInterval(moveHeadlights, 50);
@@ -149,6 +171,7 @@
             window.startQuiz = startQuiz;
             window.checkAnswer = checkAnswer;
         });
+
     </script>
 </body>
 </html>
