@@ -122,16 +122,19 @@
                 displayQuestion();
             });
 
-            function displayQuestion() {
-                questionText.innerHTML = ''; // Clear existing content
+           function displayQuestion() {
+    questionText.innerHTML = ''; // Clear existing content
 
-                const questionContainer = document.createElement("div");
-                questionContainer.style.fontSize = "48px";
-                questionContainer.style.color = "white";
-                questionContainer.style.textShadow = "2px 2px 4px black";
-                questionContainer.textContent = "Your actual question goes here.";
+    const questionContainer = document.createElement("div");
+    questionContainer.id = "question";
+    questionContainer.style.fontSize = "48px";
+    questionContainer.style.color = "white";
+    questionContainer.style.textShadow = "2px 2px 4px black";
+    questionContainer.textContent = "Your actual question goes here.";
 
-                questionText.appendChild(questionContainer);
+    questionText.appendChild(questionContainer);
+}
+
             }
 
             function startHeadlights() {
