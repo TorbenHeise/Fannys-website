@@ -1,21 +1,43 @@
-{
-    const headlights = document.createElement("div");
-    headlights.className = "headlights";
-    document.body.appendChild(headlights);
+document.addEventListener("DOMContentLoaded", function() {
+    const questions = [
+        { question: "What is the capital of France?", answer: "Paris" },
+        { question: "Which planet is known as the Red Planet?", answer: "Mars" },
+        // Add more questions as needed
+    ];
 
-    let position = 0;
-    let isMovingRight = true;
+    let currentQuestionIndex = 0;
 
-    function moveHeadlights() {
-        if (position > window.innerWidth - headlights.offsetWidth) {
-            isMovingRight = false;
-        } else if (position < 0) {
-            isMovingRight = true;
-        }
-
-        position += isMovingRight ? 5 : -5;
-        headlights.style.left = position + "px";
+    function displayQuestion() {
+        const questionText = document.getElementById("question-text");
+        questionText.textContent = questions[currentQuestionIndex].question;
     }
 
-    setInterval(moveHeadlights, 50);
+    function startQuiz() {
+        const quizContainer = document.getElementById("quiz-container");
+        const audio = document.getElementById("myAudio");
+
+        // Hide the quiz container initially
+        quizContainer.style.display = "none";
+
+        // Play audio when the quiz starts
+        audio.play();
+
+        // Display the first question
+        displayQuestion();
+
+        // Start the headlights
+        startHeadlights();
+    }
+
+    function checkAnswer() {
+        // Your existing checkAnswer function
+    }
+
+    function startHeadlights() {
+        // Your existing startHeadlights function
+    }
+
+    // Expose the startQuiz and checkAnswer functions globally
+    window.startQuiz = startQuiz;
+    window.checkAnswer = checkAnswer;
 });
