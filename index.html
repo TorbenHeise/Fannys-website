@@ -132,7 +132,7 @@
         }
     </style>
 
-  <script>
+ <script>
     document.addEventListener("DOMContentLoaded", function () {
         const questions = [
             { question: "What is the capital of France?", answer: "Paris" },
@@ -150,6 +150,10 @@
         function startQuiz() {
             const startButton = document.getElementById("startButton");
             const quizContainer = document.getElementById("quiz-container");
+            const audio = new Audio("openingsong.mp3");
+            audio.preload = "auto";
+            audio.loop = true;
+            audio.play();
 
             startButton.style.display = "none";
             quizContainer.style.display = "flex";
@@ -214,12 +218,6 @@
         // Call startHeadlights once the DOM is fully loaded
         startHeadlights();
     });
-
-    // Add the audio element
-    const audio = new Audio("openingsong.mp3");
-    audio.preload = "auto";
-    audio.loop = true;
-    audio.play();
 </script>
 
 
