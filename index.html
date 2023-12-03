@@ -1,87 +1,154 @@
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const questions = [
-            { question: "What is the capital of France?", answer: "Paris" },
-            { question: "Which planet is known as the Red Planet?", answer: "Mars" },
-            // Add more questions as needed
-        ];
-
-        let currentQuestionIndex = 0;
-
-        function displayQuestion() {
-            const questionText = document.getElementById("question-text");
-            questionText.textContent = questions[currentQuestionIndex].question;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret Santa Quiz</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-image: url('background.png');
+            background-repeat: repeat;
         }
 
-        function startQuiz() {
-            const startButton = document.getElementById("startButton");
-            const quizContainer = document.getElementById("quiz-container");
-            const audio = document.getElementById("myAudio");
-
-            startButton.style.display = "none";
-            quizContainer.style.display = "flex";
-            audio.play();
-
-            startHeadlights(); // Start the headlights when the quiz starts
-            displayQuestion();
+        .fullscreen-button {
+            display: block;
+            width: 100vw;
+            height: 100vh;
+            font-size: 48px;
+            padding: 20px;
+            background-color: transparent;
+            border: none;
+            color: white;
+            text-align: center;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px black;
         }
 
-        function checkAnswer() {
-            const userAnswer = document.getElementById("answer-input").value;
-            const correctAnswer = questions[currentQuestionIndex].answer;
-            const resultText = document.getElementById("result");
+        #quiz-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            display: none;
+        }
 
-            if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
-                resultText.textContent = "Correct! Moving to the next question.";
-                currentQuestionIndex++;
-                if (currentQuestionIndex < questions.length) {
-                    displayQuestion();
-                } else {
-                    resultText.textContent = "Congratulations! You've completed the quiz.";
-                }
-            } else {
-                resultText.textContent = "Incorrect. Try again.";
+        #question-text {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: white;
+            text-shadow: 1px 1px 2px black;
+        }
+
+        .headlights-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            z-index: 1000;
+        }
+
+        .headlights {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: 0 0 20px 10px white;
+        }
+    </style>
+</head>
+<body>
+    <button id="startButton" onclick="startQuiz()" class="fullscreen-button">Welcome Fanny, here is your Secret Santa quiz!</button>
+    <div id="quiz-container">
+        <div id="result"></div>
+        <div id="question-text"></div>
+        <input type="text" id="answer-input" placeholder="Your Answer">
+        <button onclick="checkAnswer()">Submit Answer</button>
+    </div>
+    <audio id="myAudio" src="openingsong.mp3"></audio>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let currentQuestionIndex = 0;
+
+            function displayQuestion() {
+                const questionText = document.getElementById("question-text");
+                questionText.textContent = questions[currentQuestionIndex].question;
             }
-        }
 
-        function startHeadlights() {
-            const headlightsContainer = document.createElement("div");
-            headlightsContainer.className = "headlights-container";
-            document.body.appendChild(headlightsContainer);
+            function startQuiz() {
+                const startButton = document.getElementById("startButton");
+                const quizContainer = document.getElementById("quiz-container");
+                const audio = document.getElementById("myAudio");
 
-            function createHeadlight() {
-                const headlights = document.createElement("div");
-                headlights.className = "headlights";
-                headlightsContainer.appendChild(headlights);
+                startButton.style.display = "none";
+                quizContainer.style.display = "flex";
+                audio.play();
 
-                let position = Math.random() * window.innerWidth / 2;
-                let isMovingRight = true;
+                startHeadlights(); // Start the headlights when the quiz starts
+                displayQuestion();
+            }
 
-                function moveHeadlights() {
-                    if (position > window.innerWidth / 2 - headlights.offsetWidth) {
-                        isMovingRight = false;
-                    } else if (position < 0) {
-                        isMovingRight = true;
+            function checkAnswer() {
+                const userAnswer = document.getElementById("answer-input").value;
+                const correctAnswer = questions[currentQuestionIndex].answer;
+                const resultText = document.getElementById("result");
+
+                if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+                    resultText.textContent = "Correct! Moving to the next question.";
+                    currentQuestionIndex++;
+                    if (currentQuestionIndex < questions.length) {
+                        displayQuestion();
+                    } else {
+                        resultText.textContent = "Congratulations! You've completed the quiz.";
+                    }
+                } else {
+                    resultText.textContent = "Incorrect. Try again.";
+                }
+            }
+
+            function startHeadlights() {
+                const headlightsContainer = document.createElement("div");
+                headlightsContainer.className = "headlights-container";
+                document.body.appendChild(headlightsContainer);
+
+                function createHeadlight() {
+                    const headlights = document.createElement("div");
+                    headlights.className = "headlights";
+                    headlightsContainer.appendChild(headlights);
+
+                    let position = Math.random() * window.innerWidth / 2;
+                    let isMovingRight = true;
+
+                    function moveHeadlights() {
+                        if (position > window.innerWidth / 2 - headlights.offsetWidth) {
+                            isMovingRight = false;
+                        } else if (position < 0) {
+                            isMovingRight = true;
+                        }
+
+                        position += isMovingRight ? 5 : -5;
+                        headlights.style.left = position + "px";
                     }
 
-                    position += isMovingRight ? 5 : -5;
-                    headlights.style.left = position + "px";
+                    setInterval(moveHeadlights, 50);
                 }
 
-                setInterval(moveHeadlights, 50);
+                // Create four headlights
+                for (let i = 0; i < 4; i++) {
+                    createHeadlight();
+                }
             }
 
-            // Create four headlights
-            for (let i = 0; i < 4; i++) {
-                createHeadlight();
-            }
-        }
-
-        window.startQuiz = startQuiz;
-        window.checkAnswer = checkAnswer;
-        window.startHeadlights = startHeadlights; // Expose startHeadlights globally
-
-        // ... (existing code)
-
-    });
-</script>
+            window.startQuiz = startQuiz;
+            window.checkAnswer = checkAnswer;
+        });
+    </script>
+</body>
+</html>
