@@ -3,7 +3,8 @@ body {
     padding: 0;
     overflow: hidden;
     background-color: #f0f5fe; /* Light blue background color */
-    background-image: url('path/to/your/pattern.png'); /* Add your pattern image */
+    background-image: url('background.png'); /* Updated image path */
+    background-repeat: repeat; /* Adjust as needed */
 }
 
 .fullscreen-button {
@@ -31,5 +32,3 @@ body {
     margin-bottom: 20px;
     font-size: 18px;
 }
-
-/* Add your existing styles for headlights if needed */
