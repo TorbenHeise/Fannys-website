@@ -20,7 +20,7 @@
 }
 
 @keyframes moveHeadlights {
-    0%, 100% {
+    0% {
         top: 0;
         left: 0;
     }
@@ -37,6 +37,11 @@
 
     75% {
         top: 100vh;
+        left: 0;
+    }
+
+    100% {
+        top: 0;
         left: 0;
     }
 }
