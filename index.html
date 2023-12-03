@@ -30,45 +30,15 @@
         }
 
         #quiz-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
             display: none;
         }
 
         #question-text {
-            margin-bottom: 40px;
+            margin: 40px;
             font-size: 48px;
             color: white;
             text-shadow: 2px 2px 4px black;
             text-align: center;
-        }
-
-        #answer-input {
-            width: 800px;
-            padding: 20px;
-            margin-bottom: 40px;
-            font-size: 24px;
-            border: 2px solid white;
-            border-radius: 10px;
-            color: white;
-            background-color: transparent;
-            text-align: center;
-        }
-
-        button {
-            width: 400px;
-            padding: 20px;
-            background-color: transparent;
-            border: 2px solid white;
-            border-radius: 10px;
-            color: white;
-            font-size: 24px;
-            text-align: center;
-            text-transform: uppercase;
-            text-shadow: 1px 1px 2px black;
         }
 
         .headlights-container {
@@ -89,7 +59,6 @@
             border-radius: 50%;
             box-shadow: 0 0 20px 10px white;
             animation: moveHeadlights 16s linear infinite;
-            display: none;
         }
 
         .headlight1 { animation-delay: 0s; }
@@ -138,15 +107,10 @@
 <body>
     <button id="startButton" onclick="startQuiz()" class="fullscreen-button">Welcome Fanny, here is your Secret Santa quiz!</button>
     <div id="quiz-container">
-        <div id="result"></div>
         <div id="question-text"></div>
-        <input type="text" id="answer-input" placeholder="Your Answer">
-        <button onclick="checkAnswer()">Submit Answer</button>
     </div>
-    <audio id="myAudio" src="openingsong.mp3"></audio>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            const audio = document.getElementById("myAudio");
             const startButton = document.getElementById("startButton");
             const quizContainer = document.getElementById("quiz-container");
             const questionText = document.getElementById("question-text");
@@ -154,7 +118,6 @@
             startButton.addEventListener("click", function () {
                 startButton.style.display = "none";
                 quizContainer.style.display = "flex";
-                audio.play();
                 startHeadlights();
                 displayQuestion();
             });
@@ -169,10 +132,6 @@
                 questionContainer.textContent = "Your actual question goes here.";
 
                 questionText.appendChild(questionContainer);
-            }
-
-            function checkAnswer() {
-                alert("Answer checked!");  // Display an alert for diagnostic purposes
             }
 
             function startHeadlights() {
@@ -207,8 +166,6 @@
                     createHeadlight();
                 }
             }
-
-            window.checkAnswer = checkAnswer;
         });
     </script>
 </body>
