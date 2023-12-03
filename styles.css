@@ -2,23 +2,22 @@ body {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #f0f5fe; /* Light blue background color */
-    background-image: url('background.png'); /* Updated image path */
-    background-repeat: repeat; /* Adjust as needed */
-    
+    background-image: url('background.png'); /* Updated full relative path */
+    background-repeat: repeat;
 }
 
 .fullscreen-button {
     display: block;
     width: 100vw;
     height: 100vh;
-    font-size: 24px;
+    font-size: 48px; /* Twice as big */
     padding: 20px;
     background-color: transparent;
     border: none;
-    color: #ffffff; /* White text color */
+    color: white;
     text-align: center;
     text-transform: uppercase;
+    text-shadow: 2px 2px 4px black; /* Added black shadow for contrast */
 }
 
 #quiz-container {
@@ -31,12 +30,25 @@ body {
 
 #question-text {
     margin-bottom: 20px;
-    font-size: 18px;
+    font-size: 24px; /* Half the size of the welcome message */
+    color: white;
+    text-shadow: 1px 1px 2px black; /* Added black shadow for contrast */
 }
+
+.headlights-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 1000;
+}
+
 .headlights {
     position: absolute;
-    width: 50px;
-    height: 50px;
+    width: 200px; /* Four times as big */
+    height: 200px; /* Four times as big */
     background-color: red; /* Add a background color */
     border-radius: 50%;
     box-shadow: 0 0 20px 10px #ffffff; /* Glow effect */
