@@ -72,73 +72,20 @@
             text-shadow: 1px 1px 2px black;
         }
 
-        .headlights-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-            z-index: 1000;
-        }
-
-        .headlights {
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            background-color: white;
-            border-radius: 50%;
-            box-shadow: 0 0 20px 10px white;
-            animation: moveHeadlights 16s linear infinite;
-            display: none;
-        }
-
-        .headlight1 { animation-delay: 0s; }
-        .headlight2 { animation-delay: 4s; }
-        .headlight3 { animation-delay: 8s; }
-        .headlight4 { animation-delay: 12s; }
-
-        @keyframes moveHeadlights {
-            0% {
-                top: 0;
-                left: 0;
-                opacity: 1;
-                visibility: visible;
-            }
-
-            25% {
-                top: 0;
-                left: 100vw;
-                opacity: 0;
-                visibility: hidden;
-            }
-
-            50% {
-                top: 100vh;
-                left: 100vw;
-                opacity: 0;
-                visibility: hidden;
-            }
-
-            75% {
-                top: 100vh;
-                left: 0;
-                opacity: 0;
-                visibility: hidden;
-            }
-
-            100% {
-                top: 0;
-                left: 0;
-                opacity: 1;
-                visibility: visible;
-            }
+        #result {
+            font-size: 32px;
+            color: lightgreen;
+            border: 2px solid black;
+            padding: 10px;
+            margin-top: 20px;
+            display: inline-block;
         }
     </style>
 </head>
 <body>
     <button id="startButton" onclick="startQuiz()" class="fullscreen-button">Welcome Fanny, here is your Secret Santa quiz!</button>
     <div id="quiz-container">
+        <div id="result"></div>
         <div id="question-text"></div>
         <input type="text" id="answer-input" placeholder="Your Answer">
         <button onclick="checkAnswer()">Submit Answer</button>
@@ -148,7 +95,6 @@
         document.addEventListener("DOMContentLoaded", function () {
             const startButton = document.getElementById("startButton");
             const quizContainer = document.getElementById("quiz-container");
-            const questionText = document.getElementById("question-text");
 
             startButton.addEventListener("click", function () {
                 startButton.style.display = "none";
@@ -157,16 +103,8 @@
             });
 
             function displayQuestion() {
-                questionText.innerHTML = ''; // Clear existing content
-
-                const questionContainer = document.createElement("div");
-                questionContainer.id = "question";
-                questionContainer.style.fontSize = "48px";
-                questionContainer.style.color = "white";
-                questionContainer.style.textShadow = "2px 2px 4px black";
-                questionContainer.textContent = "Your actual question goes here.";
-
-                questionText.appendChild(questionContainer);
+                const questionText = document.getElementById("question-text");
+                questionText.innerHTML = "Your actual question goes here.";
             }
 
             function checkAnswer() {
