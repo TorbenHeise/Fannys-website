@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secret Santa Quiz</title>
     <style>
+
         body {
             margin: 0;
             padding: 0;
@@ -98,7 +99,31 @@
             box-shadow: 0 0 20px 10px white;
             animation: moveHeadlights 16s linear infinite;
         }
-    </style>
+    /* ... (existing styles) */
+
+    @keyframes moveHeadlights {
+        /* ... (existing keyframes) */
+    }
+
+    @keyframes changeSpeed {
+        0% {
+            animation-duration: 16s;
+        }
+
+        50% {
+            animation-duration: 8s;
+        }
+
+        75% {
+            animation-duration: 4s; /* Add this keyframe for faster speed after 15 seconds */
+        }
+
+        100% {
+            animation-duration: 16s;
+        }
+    }
+</style>
+
 </head>
 <body>
     <button id="startButton" onclick="startQuiz()" class="fullscreen-button">Welcome Fanny, here is your Secret Santa quiz!</button>
