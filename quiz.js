@@ -21,7 +21,6 @@ document.addEventListener("DOMContentLoaded", function() {
         quizContainer.style.display = "block";
         audio.play();
         displayQuestion();
-        startHeadlights();  // Call startHeadlights when the quiz starts
     }
 
     function checkAnswer() {
@@ -42,6 +41,9 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
+    window.startQuiz = startQuiz;
+    window.checkAnswer = checkAnswer;
+
     function startHeadlights() {
         const headlightsContainer = document.createElement("div");
         headlightsContainer.className = "headlights-container";
@@ -56,9 +58,9 @@ document.addEventListener("DOMContentLoaded", function() {
             let isMovingRight = true;
 
             function moveHeadlights() {
-                if (position > window.innerWidth / 2 - headlights.offsetWidth) {
+                if (position > window.innerWidth - headlights.offsetWidth) {
                     isMovingRight = false;
-                } else if (position < -window.innerWidth / 2) {
+                } else if (position < 0) {
                     isMovingRight = true;
                 }
 
@@ -73,6 +75,5 @@ document.addEventListener("DOMContentLoaded", function() {
         createHeadlight();
     }
 
-    window.startQuiz = startQuiz;
-    window.checkAnswer = checkAnswer;
+    startHeadlights();  // Start headlights when the page loads
 });
