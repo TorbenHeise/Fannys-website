@@ -1,10 +1,8 @@
 /* Reset and general styles */
 body {
     margin: 0;
-    padding: 0;
+    overflow: hidden;
 }
-
-/* Specific styles for existing elements on your page */
 
 /* New styles for the headlights */
 .headlights {
@@ -17,4 +15,17 @@ body {
     border-radius: 50%;
     box-shadow: 0 0 20px 10px #ffffff; /* Glow effect */
     z-index: 1000; /* Ensure headlights are above other elements */
+    animation: moveHeadlights 5s linear infinite; /* Animation properties */
+}
+
+@keyframes moveHeadlights {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(calc(100vw - 50px));
+    }
+    100% {
+        transform: translateX(0);
+    }
 }
