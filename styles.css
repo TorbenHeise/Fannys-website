@@ -57,8 +57,8 @@ button {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 50vw; /* Adjusted to 50% width */
+    height: 50vh; /* Adjusted to 50% height */
     overflow: hidden;
     z-index: 1000;
 }
@@ -67,8 +67,31 @@ button {
     position: absolute;
     width: 200px; /* Four times as big */
     height: 200px; /* Four times as big */
-    background-color: transparent; /* Transparent background */
+    background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent white */
     border: 10px solid white; /* White border */
     border-radius: 50%;
     box-shadow: 0 0 20px 10px white; /* Glow effect */
+    animation: moveHeadlights 4s linear infinite; /* Doubled the speed */
+}
+
+@keyframes moveHeadlights {
+    25% {
+        top: 0;
+        left: 0;
+    }
+
+    50% {
+        top: 0;
+        left: 50%;
+    }
+
+    75% {
+        top: 50%;
+        left: 0;
+    }
+
+    100% {
+        top: 50%;
+        left: 50%;
+    }
 }
