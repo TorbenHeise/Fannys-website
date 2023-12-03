@@ -4,73 +4,146 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secret Santa Quiz</title>
+   
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-image: url('background.png');
-            background-repeat: repeat;
+    body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-image: url('background.png');
+        background-repeat: repeat;
+    }
+
+    .fullscreen-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100vw;
+        height: 100vh;
+        font-size: 48px;
+        background-color: transparent;
+        border: 2px solid white;
+        border-radius: 10px;
+        color: white;
+        text-align: center;
+        text-transform: uppercase;
+        text-shadow: 2px 2px 4px black;
+    }
+
+    #quiz-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        display: none;
+    }
+
+    #question-text {
+        margin-bottom: 40px;
+        font-size: 48px;
+        color: white;
+        text-shadow: 2px 2px 4px black;
+        text-align: center;
+    }
+
+    #answer-input {
+        width: 800px;
+        padding: 20px;
+        margin-bottom: 40px;
+        font-size: 24px;
+        border: 2px solid white;
+        border-radius: 10px;
+        color: white;
+        background-color: transparent;
+        text-align: center;
+    }
+
+    button {
+        width: 400px;
+        padding: 20px;
+        background-color: transparent;
+        border: 2px solid white;
+        border-radius: 10px;
+        color: white;
+        font-size: 24px;
+        text-align: center;
+        text-transform: uppercase;
+        text-shadow: 1px 1px 2px black;
+    }
+
+    #result {
+        font-size: 32px;
+        color: lightgreen;
+        border: 2px solid black;
+        padding: 10px;
+        margin-top: 20px;
+    }
+
+    .headlights-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        z-index: 1000;
+    }
+
+    .headlights {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background-color: white;
+        border-radius: 50%;
+        box-shadow: 0 0 20px 10px white;
+        animation: moveHeadlights 16s linear infinite;
+        display: none;
+    }
+
+    .headlight1 { animation-delay: 0s; }
+    .headlight2 { animation-delay: 4s; }
+    .headlight3 { animation-delay: 8s; }
+    .headlight4 { animation-delay: 12s; }
+
+    @keyframes moveHeadlights {
+        0% {
+            top: 0;
+            left: 0;
+            opacity: 1;
+            visibility: visible;
         }
 
-        .fullscreen-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100vw;
-            height: 100vh;
-            font-size: 48px;
-            background-color: transparent;
-            border: 2px solid white;
-            border-radius: 10px;
-            color: white;
-            text-align: center;
-            text-transform: uppercase;
-            text-shadow: 2px 2px 4px black;
+        25% {
+            top: 0;
+            left: 100vw;
+            opacity: 0;
+            visibility: hidden;
         }
 
-        #quiz-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            display: none;
+        50% {
+            top: 100vh;
+            left: 100vw;
+            opacity: 0;
+            visibility: hidden;
         }
 
-        #question-text {
-            margin-bottom: 40px;
-            font-size: 48px;
-            color: white;
-            text-shadow: 2px 2px 4px black;
-            text-align: center;
+        75% {
+            top: 100vh;
+            left: 0;
+            opacity: 0;
+            visibility: hidden;
         }
 
-        #answer-input {
-            width: 800px;
-            padding: 20px;
-            margin-bottom: 40px;
-            font-size: 24px;
-            border: 2px solid white;
-            border-radius: 10px;
-            color: white;
-            background-color: transparent;
-            text-align: center;
+        100% {
+            top: 0;
+            left: 0;
+            opacity: 1;
+            visibility: visible;
         }
+    }
+</style>
 
-        button {
-            width: 400px;
-            padding: 20px;
-            background-color: transparent;
-            border: 2px solid white;
-            border-radius: 10px;
-            color: white;
-            font-size: 24px;
-            text-align: center;
-            text-transform: uppercase;
-            text-shadow: 1px 1px 2px black;
-        }
-    </style>
 </head>
 <body>
     <button id="startButton" onclick="startQuiz()" class="fullscreen-button">Welcome Fanny, here is your Secret Santa quiz!</button>
