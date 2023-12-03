@@ -2,6 +2,14 @@
 body {
     margin: 0;
     overflow: hidden;
+    #quiz-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
 }
 
 /* New styles for the headlights */
