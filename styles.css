@@ -29,9 +29,27 @@ body {
 }
 
 #question-text {
-    margin-bottom: 20px;
-    font-size: 24px; /* Half the size of the welcome message */
+    margin-bottom: 40px; /* Twice as big */
+    font-size: 48px; /* Twice as big */
     color: white;
+    text-shadow: 2px 2px 4px black; /* Added black shadow for contrast */
+}
+
+#answer-input {
+    width: 400px; /* Twice as big */
+    padding: 10px;
+    margin-bottom: 20px; /* Twice as big */
+}
+
+button {
+    width: 400px; /* Twice as big */
+    padding: 15px;
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 24px; /* Same size as the welcome message */
+    text-align: center;
+    text-transform: uppercase;
     text-shadow: 1px 1px 2px black; /* Added black shadow for contrast */
 }
 
@@ -49,7 +67,8 @@ body {
     position: absolute;
     width: 200px; /* Four times as big */
     height: 200px; /* Four times as big */
-    background-color: red; /* Add a background color */
+    background-color: transparent; /* Transparent background */
+    border: 10px solid white; /* White border */
     border-radius: 50%;
-    box-shadow: 0 0 20px 10px #ffffff; /* Glow effect */
+    box-shadow: 0 0 20px 10px white; /* Glow effect */
 }
